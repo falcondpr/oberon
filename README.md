@@ -31,7 +31,7 @@ Download the project and go through the `README.md` file. This will provide furt
 
 ## Structure
 
-| Path                  |            Descripción             |
-| :-------------------- | :--------------------------------: |
-| [api](apps/api/)      | TS, NestJS, GraphQL, Prisma, Mongo |
-| [frontend](apps/web/) |  React, TS, TailwindCSS, RadixUI   |
+| Path             |            Descripción             |
+| :--------------- | :--------------------------------: |
+| [api](apps/api/) | TS, NestJS, GraphQL, Prisma, Mongo |
+| [app](apps/web/) |  React, TS, TailwindCSS, RadixUI   |
