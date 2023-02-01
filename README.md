@@ -34,4 +34,4 @@ Download the project and go through the `README.md` file. This will provide furt
 | Path             |            Descripción             |
 | :--------------- | :--------------------------------: |
 | [api](apps/api/) | TS, NestJS, GraphQL, Prisma, Mongo |
-| [app](apps/web/) |  React, TS, TailwindCSS, RadixUI   |
+| [web](apps/web/) |  React, TS, TailwindCSS, RadixUI   |
