@@ -11,6 +11,9 @@ import { TesterModule } from './tester/tester.module';
       driver: ApolloDriver,
       playground: true,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.graphql'),
+      definitions: {
+        path: join(process.cwd(), 'apps/api/src/graphql.ts'),
+      },
     }),
     TesterModule,
   ],
