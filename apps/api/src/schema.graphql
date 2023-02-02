@@ -9,5 +9,24 @@ type Tester {
 }
 
 type Query {
-  testers: [Tester!]!
+  index: String!
+  findAllTesters: [Tester!]!
+  findTesterById(testerId: String!): Tester
+}
+
+type Mutation {
+  deleteTester(testerId: String!): Tester
+  addTester(addTesterArgs: AddTesterArgs!): Tester!
+  updateTester(testerId: String!, editTesterArgs: EditTesterArgs!): Tester!
+}
+
+input AddTesterArgs {
+  id: String!
+  name: String!
+  email: String
+}
+
+input EditTesterArgs {
+  name: String
+  email: String
 }

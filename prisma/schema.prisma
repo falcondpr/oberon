@@ -9,6 +9,6 @@ datasource db {
 
 model Tester {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
-  email       String @unique
-  name        String?
+  email       String? @unique
+  name        String
 }
