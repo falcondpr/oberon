@@ -1,8 +1,8 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
 
-@ObjectType()
-export class Tester {
+@InputType()
+export class AddTesterArgs {
   @Field(() => String)
   id: string;
 
