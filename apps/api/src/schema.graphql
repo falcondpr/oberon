@@ -8,16 +8,37 @@ type Tester {
   email: String
 }
 
+type User {
+  id: String!
+  email: String!
+  fullname: String!
+  username: String!
+  password: String!
+  avatar: String
+  role: String!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   index: String!
   findAllTesters: [Tester!]!
   findTesterById(testerId: String!): Tester
+  findAllUsers: [User!]!
+  findUserById(id: String!): User!
 }
 
 type Mutation {
   deleteTester(testerId: String!): Tester
   addTester(addTesterArgs: AddTesterArgs!): Tester!
   updateTester(testerId: String!, editTesterArgs: EditTesterArgs!): Tester!
+  addUser(addUserArgs: AddUserArgs!): User!
+  updateUser(editUserArgs: EditUserArgs!, id: String!): User!
+  deleteUser(id: String!): User!
 }
 
 input AddTesterArgs {
@@ -29,4 +50,22 @@ input AddTesterArgs {
 input EditTesterArgs {
   name: String
   email: String
+}
+
+input AddUserArgs {
+  email: String!
+  fullname: String!
+  username: String!
+  password: String!
+  avatar: String
+  role: String!
+}
+
+input EditUserArgs {
+  email: String
+  fullname: String
+  username: String
+  password: String
+  avatar: String
+  role: String
 }
