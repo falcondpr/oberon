@@ -24,12 +24,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Feedback {
+  id: String!
+  title: String!
+  description: String!
+  category: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   index: String!
   findAllTesters: [Tester!]!
   findTesterById(testerId: String!): Tester
   findAllUsers: [User!]!
   findUserById(id: String!): User!
+  findAllFeedbacks: [Feedback!]!
+  findOneFeedback(id: String!): Feedback!
 }
 
 type Mutation {
@@ -37,8 +48,11 @@ type Mutation {
   addTester(addTesterArgs: AddTesterArgs!): Tester!
   updateTester(testerId: String!, editTesterArgs: EditTesterArgs!): Tester!
   addUser(addUserArgs: AddUserArgs!): User!
-  updateUser(editUserArgs: EditUserArgs!, id: String!): User!
+  updateUser(id: String!, editUserArgs: EditUserArgs!): User!
   deleteUser(id: String!): User!
+  addFeedback(addFeedbackArgs: AddFeedbackArgs!): Feedback!
+  updateFeedback(id: String!, editFeedbackArgs: EditFeedbackArgs!): Feedback!
+  deleteFeedback(id: String!): Feedback!
 }
 
 input AddTesterArgs {
@@ -68,4 +82,16 @@ input EditUserArgs {
   password: String
   avatar: String
   role: String
+}
+
+input AddFeedbackArgs {
+  title: String!
+  description: String!
+  category: String!
+}
+
+input EditFeedbackArgs {
+  title: String
+  description: String
+  category: String
 }
