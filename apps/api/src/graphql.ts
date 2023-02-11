@@ -37,6 +37,18 @@ export interface EditUserArgs {
     role?: Nullable<string>;
 }
 
+export interface AddFeedbackArgs {
+    title: string;
+    description: string;
+    category: string;
+}
+
+export interface EditFeedbackArgs {
+    title?: Nullable<string>;
+    description?: Nullable<string>;
+    category?: Nullable<string>;
+}
+
 export interface Tester {
     id: string;
     name: string;
@@ -54,12 +66,23 @@ export interface User {
     createdAt: DateTime;
 }
 
+export interface Feedback {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
 export interface IQuery {
     index(): string | Promise<string>;
     findAllTesters(): Tester[] | Promise<Tester[]>;
     findTesterById(testerId: string): Nullable<Tester> | Promise<Nullable<Tester>>;
     findAllUsers(): User[] | Promise<User[]>;
     findUserById(id: string): User | Promise<User>;
+    findAllFeedbacks(): Feedback[] | Promise<Feedback[]>;
+    findOneFeedback(id: string): Feedback | Promise<Feedback>;
 }
 
 export interface IMutation {
@@ -67,8 +90,11 @@ export interface IMutation {
     addTester(addTesterArgs: AddTesterArgs): Tester | Promise<Tester>;
     updateTester(testerId: string, editTesterArgs: EditTesterArgs): Tester | Promise<Tester>;
     addUser(addUserArgs: AddUserArgs): User | Promise<User>;
-    updateUser(editUserArgs: EditUserArgs, id: string): User | Promise<User>;
+    updateUser(id: string, editUserArgs: EditUserArgs): User | Promise<User>;
     deleteUser(id: string): User | Promise<User>;
+    addFeedback(addFeedbackArgs: AddFeedbackArgs): Feedback | Promise<Feedback>;
+    updateFeedback(id: string, editFeedbackArgs: EditFeedbackArgs): Feedback | Promise<Feedback>;
+    deleteFeedback(id: string): Feedback | Promise<Feedback>;
 }
 
 export type DateTime = any;
