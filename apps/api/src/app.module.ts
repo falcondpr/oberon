@@ -2,6 +2,7 @@ import { join } from 'path';
 import { ApolloDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ConfigModule } from '@nestjs/config';
 
 import { TesterModule } from './tester/tester.module';
 import { AppResolver } from './app.resolver';
@@ -10,6 +11,7 @@ import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     GraphQLModule.forRoot({
       driver: ApolloDriver,
       playground: true,
