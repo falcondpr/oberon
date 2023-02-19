@@ -8,10 +8,12 @@ import { TesterModule } from './tester/tester.module';
 import { AppResolver } from './app.resolver';
 import { UserModule } from './user/user.module';
 import { FeedbackModule } from './feedback/feedback.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    JwtModule,
     GraphQLModule.forRoot({
       driver: ApolloDriver,
       playground: true,
