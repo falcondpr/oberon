@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 
 import { UserService } from './user.service';
 import { User } from './schema/user.schema';
-import { AddUserArgs, EditUserArgs } from './args';
+import { AddUserArgs, EditUserArgs, LoginUserArgs } from './args';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -11,6 +11,13 @@ export class UserResolver {
   @Mutation(() => String, { name: 'addUser' })
   async add(@Args('addUserArgs') args: AddUserArgs): Promise<string> {
     return this.userService.create(args);
+  }
+
+  @Mutation(() => String, { name: 'loginUser' })
+  async login(
+    @Args('loginUserArgs') args: LoginUserArgs
+  ): Promise<string | unknown> {
+    return this.userService.login(args);
   }
 
   @Query(() => [User], { name: 'findAllUsers' })

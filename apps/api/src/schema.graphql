@@ -48,6 +48,7 @@ type Mutation {
   addTester(addTesterArgs: AddTesterArgs!): Tester!
   updateTester(testerId: String!, editTesterArgs: EditTesterArgs!): Tester!
   addUser(addUserArgs: AddUserArgs!): String!
+  loginUser(loginUserArgs: LoginUserArgs!): String!
   updateUser(id: String!, editUserArgs: EditUserArgs!): User!
   deleteUser(id: String!): User!
   addFeedback(addFeedbackArgs: AddFeedbackArgs!): Feedback!
@@ -73,6 +74,11 @@ input AddUserArgs {
   password: String!
   avatar: String
   role: String!
+}
+
+input LoginUserArgs {
+  email: String!
+  password: String!
 }
 
 input EditUserArgs {

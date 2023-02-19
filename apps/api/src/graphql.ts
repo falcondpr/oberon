@@ -28,6 +28,11 @@ export interface AddUserArgs {
     role: string;
 }
 
+export interface LoginUserArgs {
+    email: string;
+    password: string;
+}
+
 export interface EditUserArgs {
     email?: Nullable<string>;
     fullname?: Nullable<string>;
@@ -90,6 +95,7 @@ export interface IMutation {
     addTester(addTesterArgs: AddTesterArgs): Tester | Promise<Tester>;
     updateTester(testerId: string, editTesterArgs: EditTesterArgs): Tester | Promise<Tester>;
     addUser(addUserArgs: AddUserArgs): string | Promise<string>;
+    loginUser(loginUserArgs: LoginUserArgs): string | Promise<string>;
     updateUser(id: string, editUserArgs: EditUserArgs): User | Promise<User>;
     deleteUser(id: string): User | Promise<User>;
     addFeedback(addFeedbackArgs: AddFeedbackArgs): Feedback | Promise<Feedback>;

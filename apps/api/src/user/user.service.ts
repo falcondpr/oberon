@@ -1,9 +1,9 @@
 import * as argon from 'argon2';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../prisma.service';
-import { AddUserArgs, EditUserArgs } from './args';
+import { AddUserArgs, EditUserArgs, LoginUserArgs } from './args';
 import { User } from './schema/user.schema';
 
 @Injectable()
@@ -31,8 +31,39 @@ export class UserService {
         data: { ...args, password: pswHash },
       });
 
-      const token = await this.singInToken(user.id, user.email, user.fullname);
-      return token;
+      return await this.singInToken(user.id, user.email, user.fullname);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async login(args: LoginUserArgs): Promise<string | unknown> {
+    try {
+      const foundUserByEmail = await this.prisma.user.findFirst({
+        where: { email: args.email },
+      });
+
+      const foundUserByUsername = await this.prisma.user.findFirst({
+        where: { username: args.email },
+      });
+
+      if (foundUserByEmail) {
+        return await this.singInToken(
+          foundUserByEmail.id,
+          foundUserByEmail.email,
+          foundUserByEmail.fullname
+        );
+      }
+
+      if (foundUserByUsername) {
+        return await this.singInToken(
+          foundUserByUsername.id,
+          foundUserByUsername.email,
+          foundUserByUsername.fullname
+        );
+      }
+
+      return new NotFoundException('User not found!');
     } catch (error) {
       console.log(error);
     }
