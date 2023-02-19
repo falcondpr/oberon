@@ -15,12 +15,13 @@ export class UserService {
 
   async singInToken(id: string, email: string, fullname: string) {
     const payload = { id, email, fullname };
-    const config = {
-      secret: process.env.SECRET_KEY,
-      expiresIn: process.env.EXPIRES_KEY,
-    };
 
-    return this.jwtService.signAsync(payload, config);
+    const token = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.EXPIRES_KEY,
+      secret: process.env.SECRET_KEY,
+    });
+
+    return token;
   }
 
   async create(args: AddUserArgs): Promise<string> {
@@ -29,9 +30,9 @@ export class UserService {
       const user: User = await this.prisma.user.create({
         data: { ...args, password: pswHash },
       });
-      console.log(user);
 
-      return this.singInToken(user.id, user.email, user.fullname);
+      const token = await this.singInToken(user.id, user.email, user.fullname);
+      return token;
     } catch (error) {
       console.log(error);
     }

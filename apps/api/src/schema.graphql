@@ -47,7 +47,7 @@ type Mutation {
   deleteTester(testerId: String!): Tester
   addTester(addTesterArgs: AddTesterArgs!): Tester!
   updateTester(testerId: String!, editTesterArgs: EditTesterArgs!): Tester!
-  addUser(addUserArgs: AddUserArgs!): User!
+  addUser(addUserArgs: AddUserArgs!): String!
   updateUser(id: String!, editUserArgs: EditUserArgs!): User!
   deleteUser(id: String!): User!
   addFeedback(addFeedbackArgs: AddFeedbackArgs!): Feedback!

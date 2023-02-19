@@ -89,7 +89,7 @@ export interface IMutation {
     deleteTester(testerId: string): Nullable<Tester> | Promise<Nullable<Tester>>;
     addTester(addTesterArgs: AddTesterArgs): Tester | Promise<Tester>;
     updateTester(testerId: string, editTesterArgs: EditTesterArgs): Tester | Promise<Tester>;
-    addUser(addUserArgs: AddUserArgs): User | Promise<User>;
+    addUser(addUserArgs: AddUserArgs): string | Promise<string>;
     updateUser(id: string, editUserArgs: EditUserArgs): User | Promise<User>;
     deleteUser(id: string): User | Promise<User>;
     addFeedback(addFeedbackArgs: AddFeedbackArgs): Feedback | Promise<Feedback>;

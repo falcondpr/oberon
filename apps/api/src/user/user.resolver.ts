@@ -8,7 +8,7 @@ import { AddUserArgs, EditUserArgs } from './args';
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Mutation(() => User, { name: 'addUser' })
+  @Mutation(() => String, { name: 'addUser' })
   async add(@Args('addUserArgs') args: AddUserArgs): Promise<string> {
     return this.userService.create(args);
   }
