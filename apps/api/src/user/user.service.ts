@@ -39,33 +39,27 @@ export class UserService {
 
   async login(args: LoginUserArgs): Promise<string | unknown> {
     try {
-      const foundUserByEmail = await this.prisma.user.findFirst({
+      const foundUserByEmail: User = await this.prisma.user.findUnique({
         where: { email: args.email },
       });
 
-      const foundUserByUsername = await this.prisma.user.findFirst({
+      const foundUserByUsername: User = await this.prisma.user.findFirst({
         where: { username: args.email },
       });
 
-      if (foundUserByEmail) {
-        return await this.singInToken(
-          foundUserByEmail.id,
-          foundUserByEmail.email,
-          foundUserByEmail.fullname
-        );
-      }
+      const currentUser = foundUserByEmail || foundUserByUsername;
+      if (!currentUser) return new NotFoundException('User not found!');
 
-      if (foundUserByUsername) {
-        return await this.singInToken(
-          foundUserByUsername.id,
-          foundUserByUsername.email,
-          foundUserByUsername.fullname
-        );
-      }
+      const pwIsOk = await argon.verify(currentUser.password, args.password);
+      if (!pwIsOk) return new NotFoundException('Credential no valids');
 
-      return new NotFoundException('User not found!');
+      return await this.singInToken(
+        currentUser.id,
+        currentUser.email,
+        currentUser.fullname
+      );
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
@@ -77,10 +71,17 @@ export class UserService {
     return this.prisma.user.findFirstOrThrow({ where: { id } });
   }
 
-  update(id: string, args: EditUserArgs) {
+  async update(id: string, args: EditUserArgs) {
     try {
-      // encrypt password
-      return this.prisma.user.update({ where: { id }, data: args });
+      let pwHash: string
+      if (args.password) {
+        pwHash = await argon.hash(args.password)
+      }
+      
+      return this.prisma.user.update({
+        where: { id },
+        data: { ...args, password: pwHash },
+      });
     } catch (error) {
       console.log(error);
     }
