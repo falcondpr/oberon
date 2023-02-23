@@ -52,6 +52,7 @@ export interface EditFeedbackArgs {
     title?: Nullable<string>;
     description?: Nullable<string>;
     category?: Nullable<string>;
+    status?: Nullable<string>;
 }
 
 export interface AddCommentArgs {
@@ -88,6 +89,7 @@ export interface Feedback {
     title: string;
     description: string;
     category: string;
+    status: string;
     createdAt: DateTime;
     updatedAt: DateTime;
 }

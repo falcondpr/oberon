@@ -1,5 +1,8 @@
 import { AddFeedbackArgs } from './add.feedback.args';
-import { InputType, PartialType } from '@nestjs/graphql';
+import { Field, InputType, PartialType } from '@nestjs/graphql';
 
 @InputType()
-export class EditFeedbackArgs extends PartialType(AddFeedbackArgs) {}
+export class EditFeedbackArgs extends PartialType(AddFeedbackArgs) {
+  @Field(() => String, { nullable: true })
+  status?: string
+}

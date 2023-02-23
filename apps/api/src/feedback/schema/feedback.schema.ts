@@ -14,6 +14,9 @@ export class Feedback {
   @Field(() => String)
   category: string;
 
+  @Field(() => String)
+  status: string;
+
   @Field(() => Date)
   createdAt: Date;
 

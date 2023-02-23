@@ -29,6 +29,7 @@ type Feedback {
   title: String!
   description: String!
   category: String!
+  status: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -115,6 +116,7 @@ input EditFeedbackArgs {
   title: String
   description: String
   category: String
+  status: String
 }
 
 input AddCommentArgs {
