@@ -1,5 +1,5 @@
 import * as argon from 'argon2';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../prisma.service';
@@ -51,7 +51,7 @@ export class UserService {
       if (!currentUser) return new NotFoundException('User not found!');
 
       const pwIsOk = await argon.verify(currentUser.password, args.password);
-      if (!pwIsOk) return new NotFoundException('Credential no valids');
+      if (!pwIsOk) return new BadRequestException('Credential no valids');
 
       return await this.singInToken(
         currentUser.id,
