@@ -54,6 +54,18 @@ export interface EditFeedbackArgs {
     category?: Nullable<string>;
 }
 
+export interface AddCommentArgs {
+    content: string;
+    feedbackId: string;
+    subCommentId?: Nullable<string>;
+}
+
+export interface EditCommentArgs {
+    content?: Nullable<string>;
+    feedbackId?: Nullable<string>;
+    subCommentId?: Nullable<string>;
+}
+
 export interface Tester {
     id: string;
     name: string;
@@ -80,6 +92,15 @@ export interface Feedback {
     updatedAt: DateTime;
 }
 
+export interface Comment {
+    id: string;
+    content: string;
+    feedbackId: string;
+    subCommentId?: Nullable<string>;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
+
 export interface IQuery {
     index(): string | Promise<string>;
     findAllTesters(): Tester[] | Promise<Tester[]>;
@@ -88,6 +109,9 @@ export interface IQuery {
     findUserById(id: string): User | Promise<User>;
     findAllFeedbacks(): Feedback[] | Promise<Feedback[]>;
     findOneFeedback(id: string): Feedback | Promise<Feedback>;
+    findAllCommentsByFeedback(feedbackId: string): Comment[] | Promise<Comment[]>;
+    findAllSubCommentsByComments(commentId: string, feedbackId: string): Comment[] | Promise<Comment[]>;
+    findOneComment(id: string): Comment | Promise<Comment>;
 }
 
 export interface IMutation {
@@ -101,6 +125,9 @@ export interface IMutation {
     addFeedback(addFeedbackArgs: AddFeedbackArgs): Feedback | Promise<Feedback>;
     updateFeedback(id: string, editFeedbackArgs: EditFeedbackArgs): Feedback | Promise<Feedback>;
     deleteFeedback(id: string): Feedback | Promise<Feedback>;
+    addComment(addCommentArgs: AddCommentArgs): Comment | Promise<Comment>;
+    updateComment(id: string, editCommentArgs: EditCommentArgs): Comment | Promise<Comment>;
+    deleteComment(id: string): Comment | Promise<Comment>;
 }
 
 export type DateTime = any;
