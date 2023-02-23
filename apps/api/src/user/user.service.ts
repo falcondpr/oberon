@@ -59,7 +59,7 @@ export class UserService {
         currentUser.fullname
       );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
