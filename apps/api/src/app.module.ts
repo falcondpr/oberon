@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { JwtModule } from '@nestjs/jwt';
 import { CommentModule } from './comment/comment.module';
+import { RoadmapModule } from './roadmap/roadmap.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CommentModule } from './comment/comment.module';
     UserModule,
     FeedbackModule,
     CommentModule,
+    RoadmapModule,
   ],
   controllers: [],
   providers: [AppResolver],

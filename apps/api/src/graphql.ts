@@ -67,6 +67,14 @@ export interface EditCommentArgs {
     subCommentId?: Nullable<string>;
 }
 
+export interface AddRoadmapArgs {
+    text: string;
+}
+
+export interface EditRoadmapArgs {
+    text?: Nullable<string>;
+}
+
 export interface Tester {
     id: string;
     name: string;
@@ -103,6 +111,14 @@ export interface Comment {
     updatedAt: DateTime;
 }
 
+export interface Roadmap {
+    id: string;
+    text: string;
+    createdAt: DateTime;
+    slug: string;
+    updatedAt: DateTime;
+}
+
 export interface IQuery {
     index(): string | Promise<string>;
     findAllTesters(): Tester[] | Promise<Tester[]>;
@@ -114,6 +130,8 @@ export interface IQuery {
     findAllCommentsByFeedback(feedbackId: string): Comment[] | Promise<Comment[]>;
     findAllSubCommentsByComments(commentId: string, feedbackId: string): Comment[] | Promise<Comment[]>;
     findOneComment(id: string): Comment | Promise<Comment>;
+    findAllRoadmaps(): Roadmap[] | Promise<Roadmap[]>;
+    findOneRoadmap(id: string): Roadmap | Promise<Roadmap>;
 }
 
 export interface IMutation {
@@ -130,6 +148,9 @@ export interface IMutation {
     addComment(addCommentArgs: AddCommentArgs): Comment | Promise<Comment>;
     updateComment(id: string, editCommentArgs: EditCommentArgs): Comment | Promise<Comment>;
     deleteComment(id: string): Comment | Promise<Comment>;
+    addRoadmap(addRoadmapArgs: AddRoadmapArgs): Roadmap | Promise<Roadmap>;
+    updateRoadmap(id: string, updateRoadmapInput: EditRoadmapArgs): Roadmap | Promise<Roadmap>;
+    deleteRoadmap(id: string): Roadmap | Promise<Roadmap>;
 }
 
 export type DateTime = any;

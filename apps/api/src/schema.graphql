@@ -43,6 +43,14 @@ type Comment {
   updatedAt: DateTime!
 }
 
+type Roadmap {
+  id: String!
+  text: String!
+  createdAt: DateTime!
+  slug: String!
+  updatedAt: DateTime!
+}
+
 type Query {
   index: String!
   findAllTesters: [Tester!]!
@@ -54,6 +62,8 @@ type Query {
   findAllCommentsByFeedback(feedbackId: String!): [Comment!]!
   findAllSubCommentsByComments(commentId: String!, feedbackId: String!): [Comment!]!
   findOneComment(id: String!): Comment!
+  findAllRoadmaps: [Roadmap!]!
+  findOneRoadmap(id: String!): Roadmap!
 }
 
 type Mutation {
@@ -70,6 +80,9 @@ type Mutation {
   addComment(addCommentArgs: AddCommentArgs!): Comment!
   updateComment(id: String!, editCommentArgs: EditCommentArgs!): Comment!
   deleteComment(id: String!): Comment!
+  addRoadmap(addRoadmapArgs: AddRoadmapArgs!): Roadmap!
+  updateRoadmap(id: String!, updateRoadmapInput: EditRoadmapArgs!): Roadmap!
+  deleteRoadmap(id: String!): Roadmap!
 }
 
 input AddTesterArgs {
@@ -129,4 +142,12 @@ input EditCommentArgs {
   content: String
   feedbackId: String
   subCommentId: String
+}
+
+input AddRoadmapArgs {
+  text: String!
+}
+
+input EditRoadmapArgs {
+  text: String
 }
