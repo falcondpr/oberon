@@ -9,6 +9,7 @@ import { AppResolver } from './app.resolver';
 import { UserModule } from './user/user.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
     TesterModule,
     UserModule,
     FeedbackModule,
+    CommentModule,
   ],
   controllers: [],
   providers: [AppResolver],

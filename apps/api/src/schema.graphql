@@ -33,6 +33,15 @@ type Feedback {
   updatedAt: DateTime!
 }
 
+type Comment {
+  id: String!
+  content: String!
+  feedbackId: String!
+  subCommentId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   index: String!
   findAllTesters: [Tester!]!
@@ -41,6 +50,9 @@ type Query {
   findUserById(id: String!): User!
   findAllFeedbacks: [Feedback!]!
   findOneFeedback(id: String!): Feedback!
+  findAllCommentsByFeedback(feedbackId: String!): [Comment!]!
+  findAllSubCommentsByComments(commentId: String!, feedbackId: String!): [Comment!]!
+  findOneComment(id: String!): Comment!
 }
 
 type Mutation {
@@ -54,6 +66,9 @@ type Mutation {
   addFeedback(addFeedbackArgs: AddFeedbackArgs!): Feedback!
   updateFeedback(id: String!, editFeedbackArgs: EditFeedbackArgs!): Feedback!
   deleteFeedback(id: String!): Feedback!
+  addComment(addCommentArgs: AddCommentArgs!): Comment!
+  updateComment(id: String!, editCommentArgs: EditCommentArgs!): Comment!
+  deleteComment(id: String!): Comment!
 }
 
 input AddTesterArgs {
@@ -100,4 +115,16 @@ input EditFeedbackArgs {
   title: String
   description: String
   category: String
+}
+
+input AddCommentArgs {
+  content: String!
+  feedbackId: String!
+  subCommentId: String
+}
+
+input EditCommentArgs {
+  content: String
+  feedbackId: String
+  subCommentId: String
 }
