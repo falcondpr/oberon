@@ -1,5 +1,7 @@
 # Oberon
 
+> obs: migrate to api rest using **prisma**
+
 In this project I seek to expand my knowledge about backend development. I also look for the language stack and libraries that I feel most comfortable working with.
 
 In this case, for the development of the Backend I will be using NodeJS as the execution environment and NestJS as the library, GraphQL as the query language, Prisma as the ORM and for the MongoDB database. On the Frontend side I am going to use React and Typescript, as a component library and Tailwind styles with RadixUI.
